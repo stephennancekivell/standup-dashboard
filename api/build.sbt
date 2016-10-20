@@ -28,3 +28,7 @@ fork in Test := true
 parallelExecution in Test := false
 
 scalacOptions in Test ++= Seq("-Yrangepos")
+
+enablePlugins(UniversalPlugin)
+
+enablePlugins(JavaAppPackaging)
