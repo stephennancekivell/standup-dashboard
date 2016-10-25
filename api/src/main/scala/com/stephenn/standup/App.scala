@@ -1,6 +1,4 @@
-package com.stephenn.standup
-
-import java.nio.file.{Files, Paths}
+package com.stephenn.standup=
 
 import akka.actor.ActorSystem
 import akka.event.Logging
@@ -9,9 +7,6 @@ import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.model._
 import akka.http.scaladsl.model.StatusCodes._
-import com.amazonaws.regions.{Region, Regions}
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient
-import com.amazonaws.services.dynamodbv2.document.{DynamoDB, Item}
 
 import scala.io.Source
 
@@ -40,7 +35,9 @@ object WebApp extends App {
   }
 
   val route =
+    StandupApi.route ~
     path("api") {
+      StandupApi.route ~
       logRequestResult("foo") {
         get {
           complete("hello world!")
@@ -93,18 +90,4 @@ object AppConfig {
     val interface = "0.0.0.0"
     val port = 8080
   }
-}
-
-object TestWriteToDB {//sextends scala.App {
-
-  val client = new AmazonDynamoDBClient()
-  client.setRegion(Region.getRegion(Regions.AP_SOUTHEAST_2))
-
-  val db = new DynamoDB(client)
-  val table = db.getTable("standup")
-
-  val result = table.putItem(new Item()
-    .withPrimaryKey("id", "id1")
-    .withString("value", "value1")
-  )
 }
