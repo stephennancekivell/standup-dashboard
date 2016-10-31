@@ -8,6 +8,7 @@ Standup Dashboard
 * add person
 * skip person, send from middle of the queue to the bottom.
 * skip, send to bottom of queue.
+* counts, statistics, are a different path.
 
 
 GET /api/members

@@ -1,5 +1,31 @@
 <html>
+<head>
+
+</head>
 <body>
 <h1>static index</h1>
+<div id="vue">
+    <h2>{{template}}</h2>
+    <div>
+        <input v-model="newMember" @keyup.enter="onEnter">
+    </div>
+</div>
+<div id="standup-dashboard">
+    <div id="standup-next">
+        <h2>{{nextMember}}</h2>
+        <h2>member 0 {{allMembers[0]}}</h2>
+        <button>Done</button>
+
+        <div id="standup-list">
+            <div v-for="member in tailMembers">
+                <p>{{member}}</p>
+                <button>Done Standup</button>
+                <button>Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.3/vue.min.js" integrity="sha256-5CEXP4Sh+bwJYBngjYYh2TEev9kTDwcjw60jZatTHtY=" crossorigin="anonymous"></script>
+<script src="./app.js"></script>
 </body>
 </html>

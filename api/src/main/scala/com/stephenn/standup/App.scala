@@ -1,4 +1,4 @@
-package com.stephenn.standup=
+package com.stephenn.standup
 
 import akka.actor.ActorSystem
 import akka.event.Logging
@@ -23,7 +23,7 @@ object WebApp extends App {
     }
     println("reading "+path)
     val stream = Option(getClass.getResourceAsStream(path))
-    stream.map(Source.fromInputStream(_).getLines().mkString)
+    stream.map(Source.fromInputStream(_).getLines().mkString("\n"))
   }
 
   private def getExtensions(fileName: String) : String = {
@@ -57,7 +57,7 @@ object WebApp extends App {
             case None =>
               HttpResponse(NotFound)
             case Some(content) =>
-              val ext = getExtensions(requestData.uri.path.toString)
+              val ext = getExtensions(fullPath)
               val maybeContentType = MediaTypes.forExtensionOption(ext)
                 .flatMap {
                   case t: MediaType.WithFixedCharset => Some(ContentType(t))
